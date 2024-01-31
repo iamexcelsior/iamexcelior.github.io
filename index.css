@@ -1,0 +1,60 @@
+.co{
+	color: skyblue;
+	font-size: 34px;
+	padding: 0px 30px 0px 30px;
+	font-weight:700;
+
+}
+.ex{
+	font-weight:500;
+	font-size: 18px; 
+}
+.ic{
+	text-align: center;
+	padding: 15px 5px;
+	font-size: 20px;
+
+}
+
+.do{
+	text-align: center;
+}
+.dt{
+	font-size: 12px;
+
+}
+.in{
+	padding: 10px;
+	margin:10px 10px;
+	width: 98%;
+	background-color: lightgrey;
+	border:none;
+	border-radius: 20px;
+}
+.col-1{
+	border-right: 3px solid black;
+}
+.footer{
+	padding: 2% 3%;
+	background-color: lightgrey;
+	text-align: center;
+}
+.ca{
+	visibility: hidden;
+}
+.re{
+	display:  none;
+}
+@media screen and (max-width: 600px){
+	.ca{
+	visibility: visible;
+	}
+	.col-1{
+		display: none;
+	}
+	.re{
+		display: show;
+	}
+	
+
+}
