@@ -2,8 +2,11 @@
 	color: skyblue;
 	font-size: 34px;
 	padding: 0px 30px 0px 30px;
-	font-weight:700;
+	font-weight:800;
 
+}
+.cl{
+	background-color: red;
 }
 .ex{
 	font-weight:500;
@@ -11,7 +14,7 @@
 }
 .ic{
 	text-align: center;
-	padding: 15px 5px;
+	padding: 25px 5px;
 	font-size: 20px;
 
 }
@@ -22,6 +25,9 @@
 .dt{
 	font-size: 12px;
 
+}
+.ta{
+	display: flex;
 }
 .in{
 	padding: 10px;
@@ -39,15 +45,18 @@
 	background-color: lightgrey;
 	text-align: center;
 }
-.ca{
-	visibility: hidden;
-}
+
+
 .re{
-	display:  none;
+	display: none;
+
+}
+.ca{
+	display: none;
 }
 @media screen and (max-width: 600px){
 	.ca{
-	visibility: visible;
+	display: flex;
 	}
 	.col-1{
 		display: none;
@@ -55,6 +64,8 @@
 	.re{
 		display: block;
 	}
-	
+	.footer{
+		display: none;
+	}
 
 }
