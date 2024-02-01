@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">  
+
+  <!-- Bootstrap core CSS -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/fontawesome.min.css" integrity="sha384-BY+fdrpOd3gfeRvTSMT+VUZmA728cfF9Z2G42xpaRkUGu2i3DyzpTURDo5A6CaLK" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="index.css">
+  <link rel="stylesheet" type="text/css" href="fontawesome/css/all.css">
+  <title>Excelsior - Display Projects</title>
+</head>
+<body>
+
+  <div class="row" >
+    <div class="col-1 card" >
+      <span class=" co text-center">X</span>
+      <span class="text-center ex">Excelsior</span>
+      <a href="project.html" class="ic"><span class="fa fa-folder "></span></a>
+      <span class="fa fa-users ic"></span>        
+      <span class="fas fa-comment-alt ic"></span>    <br><br><br><br><br><br><br><br>        
+    </div>
+    
+    <div class="col-11 ">
+      <div class="re">
+        <span class=" co text-center">X</span>
+        <span class="text-center ex">Excelsior</span>
+      </div>
+      <input type="text" name=""placeholder="Search Project..." class="in ">  
+      <div class="container-fluid">
+         <br>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-4">
+          <div class="col">
+            <div class="card">
+              <div class="card-body" style="background-color: skyblue">                               
+                <h5 id="projectTitle">Website Project</h5>
+                <!-- Dynamically calculate and update the progress bar -->
+                <div class="progress">
+                  <div id="progressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0% Complete</div>
+                </div>                         
+              </div>
+              <div class="card-body">
+                <form> 
+                  <div class=" card-body d-flex align-items-center justify-content-between">
+                    <h5>Task</h5>
+                    <h5>Date</h5>
+                    <h5>Log</h5>
+                    <h5>Status      </h5>
+                  </div>                             
+                  <div class="card-body d-flex align-items-center justify-content-between" id="task1">
+                    <!-- Task details will be dynamically inserted here -->
+                  </div> 
+                  <div class="card-body d-flex align-items-center justify-content-between" id="task2">
+                    <!-- Task details will be dynamically inserted here -->
+                  </div> 
+                  <div class="card-body d-flex align-items-center justify-content-between" id="task3">
+                    <!-- Task details will be dynamically inserted here -->
+                  </div> 
+                  <div class="card-body d-flex align-items-center justify-content-between" id="task4">
+                    <!-- Task details will be dynamically inserted here -->
+                  </div> 
+                  <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#reportModal">Finished</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          
+            </div>
+          </div>
+        </div>
+      </div><br>
+    </div>
+  </div>
+  <div class="footer mb-auto">
+    <div class="container ">
+        <div class="text-muted">© Copyright 2024 Excelsior. All Rights Reserved Powered by Excelsior
+        </div>
+    </div>
+  </div>
+  <div class="row ca text-muted fixed-bottom" style="background-color: skyblue">
+    <div class="col-4">
+      <p class="text-center">
+        <span class="fa fa-folder do"> </span><br>
+        <span class="dt">Projects</span>
+      </p>
+    </div>
+    <div class="col-4">
+      <p class="text-center">
+        <span class="fa fa-users do">
+        </span><br><span class="dt">Team</span>
+      </p>
+    </div>
+    <div class="col-4">
+      <p class="text-center">
+        <span class="fa fa-bell do"> </span><br>
+        <span class="dt">Notifcation</span>
+      </p>
+    </div>    
+  </div>
+
+<script type="text/javascript">
+    function cl(taskId) {
+        // Remove the task when the "Done" button is clicked
+        const taskDiv = document.getElementById(taskId);
+        taskDiv.parentNode.removeChild(taskDiv);
+
+        // Calculate and update progress bar
+        updateProgressBar();
+    }
+
+    function updateProgressBar() {
+        // Calculate the percentage of completed tasks
+        const totalTasks = 4; // Adjust this based on the total number of tasks
+        const completedTasks = totalTasks - document.querySelectorAll('.card-body[id^="task"]').length;
+        const percentage = (completedTasks / totalTasks) * 100;
+
+        // Update progress bar
+        const progressBar = document.getElementById('progressBar');
+        progressBar.style.width = percentage + '%';
+        progressBar.innerText = percentage.toFixed(0) + '% Complete';
+    }
+</script>
+
+
+
+  <script>
+    // Retrieve data from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectName = urlParams.get('projectName');
+    const tasks = urlParams.getAll('tasks[]');
+    const dates = urlParams.getAll('dates[]');
+
+    // Display project details
+    const projectTitle = document.getElementById('projectTitle');
+  projectTitle.innerText = projectName;
+
+  for (let i = 0; i < tasks.length; i++) {
+    const taskId = `task${i + 1}`;
+    const taskDiv = document.getElementById(taskId);
+    taskDiv.innerHTML = `
+      <h6>${tasks[i]}</h6>
+      <h6>${dates[i]}</h6>
+      <div>
+        <button type="button" onclick="startTimer('${taskId}')" class="btn btn-primary">Start</button>
+        <span id="timer${taskId}">00:00:00</span>
+        <button type="button" onclick="logTime('${taskId}')" class="btn btn-success">Log Time</button>
+        <button onclick="cl('${taskId}')" class="btn bg-danger cl">Done</button>
+      </div>`;
+
+    // Create a new row for the log feature
+    const logRow = document.createElement('div');
+    logRow.className = 'card-body d-flex align-items-center justify-content-between';
+    logRow.id = `log${taskId}`;
+    taskDiv.parentNode.insertBefore(logRow, taskDiv.nextSibling);
+  }
+
+    // Initial update of progress bar
+    updateProgressBar();
+
+  </script>
+
+<script>
+  function startTimer(taskId) {
+    const timerId = `timer${taskId}`;
+    const timerElement = document.getElementById(timerId);
+    let totalSeconds = 0;
+
+    // Ensure the timer is not already running
+    if (!timerElement.dataset.running) {
+      timerElement.dataset.running = true;
+
+      const timerInterval = setInterval(() => {
+        totalSeconds++;
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+
+        timerElement.innerText = `${formatTime(hours)}:${formatTime(minutes)}:${formatTime(seconds)}`;
+      }, 1000);
+
+      // Save the interval ID to stop the timer later
+      timerElement.dataset.intervalId = timerInterval;
+    }
+  }
+
+  function formatTime(value) {
+    return value < 10 ? `0${value}` : value;
+  }
+</script>
+
+<script type="text/javascript">
+  function logTime(taskId) {
+      // Assuming you want to log the current time for the task
+      const currentTime = new Date().toLocaleTimeString();
+
+      // Create a new log entry
+      const logEntry = document.createElement('div');
+      logEntry.innerHTML = `<p>${currentTime} - Time logged for Task ${taskId}</p>`;
+
+      // Append the log entry to the log row
+      const logRow = document.getElementById(`log${taskId}`);
+      logRow.appendChild(logEntry);
+  }
+</script>
+
+<script type="text/javascript">
+  // Object to store timers and their intervals
+  const timers = {};
+
+  function startTimer(taskId) {
+      // Clear existing timer (if any)
+      clearInterval(timers[taskId]);
+
+      // Start a new timer for the task
+      let seconds = 0;
+      timers[taskId] = setInterval(() => {
+          seconds++;
+          const timerElement = document.getElementById(`timer${taskId}`);
+          timerElement.innerText = formatTime(seconds);
+      }, 1000);
+  }
+
+  function stopTimer(taskId) {
+      // Clear the timer interval
+      clearInterval(timers[taskId]);
+  }
+
+  function logTime(taskId) {
+      // Stop the timer
+      stopTimer(taskId);
+
+      // Log the time
+      const currentTime = new Date().toLocaleTimeString();
+      const logEntry = document.createElement('div');
+      logEntry.innerHTML = `<p>${currentTime} - Time logged for Task ${taskId}</p>`;
+      const logRow = document.getElementById(`log${taskId}`);
+      logRow.appendChild(logEntry);
+  }
+
+  function formatTime(seconds) {
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      const remainingSeconds = seconds % 60;
+      return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+  }
+</script>
+
+
+
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+  
+
+
+  <script type="text/javascript">
+    function openModal() {
+        // Open the modal
+        $('#reportModal').modal('show');
+    }
+
+    function generateReport() {
+      // Retrieve user inputs
+      const projectScope = document.getElementById('projectScope').value;
+      const timeline = document.getElementById('timeline').value;
+      const qualityAssurance = document.getElementById('qualityAssurance').value;
+      const feedback = document.getElementById('feedback').value;
+
+      // Create a report
+      const report = `
+          Project Scope: ${projectScope}
+          Timeline: ${timeline}
+          Quality Assurance: ${qualityAssurance}
+          Feedback: ${feedback}
+      `;
+
+      // Create a Blob with the report content
+      const blob = new Blob([report], { type: 'text/plain' });
+
+      // Create a link element to trigger the download
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = 'project_report.txt';
+
+      // Append the link to the document and trigger the download
+      document.body.appendChild(link);
+      link.click();
+
+      // Remove the link from the document
+      document.body.removeChild(link);
+
+      // Close the modal using Bootstrap's JavaScript method
+      const reportModal = new bootstrap.Modal(document.getElementById('reportModal'));
+      reportModal.hide();
+    }
+</script>
+  
+  <!-- Modal HTML -->
+<div id="reportModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Project Completion Report</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="projectScope" class="form-label">1) Project Scope</label>
+            <textarea class="form-control" id="projectScope" rows="3"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="timeline" class="form-label">2) Timeline (How long it took to complete each task)</label>
+            <input type="text" class="form-control" id="timeline">
+          </div>
+          <div class="mb-3">
+            <label for="qualityAssurance" class="form-label">3) Quality Assurance</label>
+            <textarea class="form-control" id="qualityAssurance" rows="3"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="feedback" class="form-label">4) Feedback</label>
+            <textarea class="form-control" id="feedback" rows="3"></textarea>
+          </div>
+          <button type="button" class="btn btn-primary" onclick="generateReport()">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+  
+<!-- Bootstrap core JavaScript and Popper.js -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
