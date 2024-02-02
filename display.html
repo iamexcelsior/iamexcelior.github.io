@@ -17,11 +17,10 @@
 
   <div class="row" >
     <div class="col-1 card" >
-      <span class=" co text-center">X</span>
-      <span class="text-center ex">Excelsior</span>
-      <a href="project.html" class="ic"><span class="fa fa-folder "></span></a>
-      <span class="fa fa-users ic"></span>        
-      <span class="fas fa-comment-alt ic"></span>    <br><br><br><br><br><br><br><br>        
+      <span class=" co text-center"><a href="index.html">X</a></span>
+      <span class="text-center ex"><a href="index.html">Excelsior</a></span>
+      <a href="display.html" class="ic"><span class="fa fa-folder ic"></span></a>
+              
     </div>
     
     <div class="col-11 ">
@@ -103,6 +102,8 @@
         progressBar.style.width = percentage + '%';
         progressBar.innerText = percentage.toFixed(0) + '% Complete';
     }
+
+
 </script>
 
 
@@ -131,6 +132,22 @@
         <button onclick="cl('${taskId}')" class="btn bg-danger cl">Done</button>
       </div>`;
 
+      const projectDetails = document.querySelector('.card'); // Adjust this selector based on your HTML structure
+
+// Check if there are no tasks
+if (tasks.length === 0) {
+    const noTasksMessage = document.createElement('p');
+    noTasksMessage.innerText = 'No tasks have been created for this project.';
+    projectDetails.appendChild(noTasksMessage);
+} else {
+    // Existing tasks creation loop
+    for (let i = 0; i < tasks.length; i++) {
+        const taskId = `task${i + 1}`;
+        const taskDiv = document.getElementById(taskId);
+        // ... (existing loop content)
+    }
+}
+
     // Create a new row for the log feature
     const logRow = document.createElement('div');
     logRow.className = 'card-body d-flex align-items-center justify-content-between';
@@ -140,6 +157,8 @@
 
     // Initial update of progress bar
     updateProgressBar();
+
+
 
   </script>
 
@@ -321,4 +340,3 @@
   <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
